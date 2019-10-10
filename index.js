@@ -14,13 +14,15 @@ const response = require('./lib/res')
 // exports.helloWorld = functions.https.onRequest((request, response) => {
 //  response.send("Hello from Firebase!");
 // });
-
+const cool = require('cool-ascii-faces')
 const express = require('express');
 const app = express();
-const port = 3000;
+// const port = 3000;
+const port = process.env.PORT || 5000
+
 
 app.listen(port,function(){
-    console.log('listen port'+port)
+    console.log('listen port '+port)
 })
 app.get('/ping',(req,res)=>{
 
@@ -88,6 +90,8 @@ app.get("/movie/detail/:slug", async function (req, res, next) {
 	response.ok(result,res);
 	// response.ok(result,res);
 });
+
+app.get('/cool', (req, res) => res.send(cool()))
 
 
 
