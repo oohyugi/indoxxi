@@ -2,6 +2,7 @@
 const file = require("./lib/detail");
 const constant = require('./lib/constant');
 const homefile = require('./lib/home');
+const radiofile = require('./lib/radio');
 
 const listMovie = require('./lib/list_movie');
 const baseUrl = constant.baseUrl;
@@ -92,6 +93,10 @@ app.get("/movie/detail/:slug", async function (req, res, next) {
 });
 
 app.get('/cool', (req, res) => res.send(cool()))
+
+app.get('/radio', function (req, res, next) {
+	response.ok(radiofile.home,res)
+ });
 
 
 
