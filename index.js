@@ -3,7 +3,8 @@ const file = require("./lib/detail");
 const constant = require('./lib/constant');
 const homefile = require('./lib/home');
 const radiofile = require('./lib/radio');
-
+const anime = require("./lib/anime");
+const redirect = require('./lib/redirect');
 const listMovie = require('./lib/list_movie');
 const baseUrl = constant.baseUrl;
 const recomend = homefile.recomended;
@@ -46,7 +47,7 @@ app.get("/", async function (req, res, next) {
 	// response.ok(result,res);
 });
 
-app.get("/:category/:page", async function (req, res, next) {
+app.get("/category/:category/:page", async function (req, res, next) {
 	const page = req.params.page;
 	const category = req.params.category;
 	const result = await listMovie.getListByCategory(page, category);
@@ -88,6 +89,26 @@ app.get("/movie/detail/:slug", async function (req, res, next) {
 	const url = baseDetailUrl + "/movie/" + req.params.slug;
     const result = await file.getDetail(url);
    
+	response.ok(result,res);
+	// response.ok(result,res);
+});
+
+app.get("/anime/:page", async function (req, res, next) {
+	const page =req.params.page
+    const result = await anime.getList(page);
+	response.ok(result,res);
+	// response.ok(result,res);
+});
+app.get("/anime/detail/:slug", async function (req, res, next) {
+	const slug =req.params.slug
+    const result = await anime.getDetail(slug);
+	response.ok(result,res);
+	// response.ok(result,res);
+});
+
+app.get("/anime/redirect/:id", async function (req, res, next) {
+	const id =`https://anjay.info/?id=${req.params.id}`
+    const result = await redirect.redirect(id)
 	response.ok(result,res);
 	// response.ok(result,res);
 });
